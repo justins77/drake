@@ -1,5 +1,15 @@
 cmake_minimum_required(VERSION 2.8.10)
 
+set(CMAKE_NINJA_LINK_POOL_SIZE 0 CACHE STRING
+  "Number of concurent link jobs that can be run with ninja build tool")
+if(CMAKE_NINJA_LINK_POOL_SIZE GREATER 0)
+  # Ninja: Configure a job pool to limit simultaneous linking.
+  set_property(GLOBAL PROPERTY JOB_POOLS
+    link_pool=${CMAKE_NINJA_LINK_POOL_SIZE})
+  # Ninja: Assign all linking to our link job pool.
+  set(CMAKE_JOB_POOL_LINK link_pool)
+endif()
+
 # options
 option(BUILD_SHARED_LIBS "Build Drake with shared libraries." ON)
 option(LONG_RUNNING_TESTS "some tests should be run nightly for coverage, but are too slow for CI" OFF)
