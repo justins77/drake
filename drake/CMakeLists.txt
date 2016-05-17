@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.10)
 
-set(CMAKE_NINJA_LINK_POOL_SIZE 0 CACHE STRING
+set(CMAKE_NINJA_LINK_POOL_SIZE 10 CACHE STRING
   "Number of concurent link jobs that can be run with ninja build tool")
 if(CMAKE_NINJA_LINK_POOL_SIZE GREATER 0)
   # Ninja: Configure a job pool to limit simultaneous linking.
