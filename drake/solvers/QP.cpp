@@ -187,7 +187,8 @@ int fastQPThatTakesQinv(vector<MatrixXd*> QinvblkDiag, const VectorXd& f,
 
     violation = Ain * x - bin;
     for (i = 0; i < M_in; i++)
-      if (violation(i) >= 1e-6) new_active.insert(i);
+      if (violation(i) >= 1e-6 && active.find(i) == active.end())
+        new_active.insert(i);
 
     bool all_pos_mults = true;
     for (i = 0; i < n_active; i++) {
